@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Parent">
+    <Key>
+      <PropertyRef Name="Parent Id" />
+    </Key>
+    <Property Name="Parent Id" Type="int" Nullable="false" />
+    <Property Name="Parent Name" Type="varchar" MaxLength="50" />
+    <Property Name="Student Id" Type="int" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="Staff Id" />
+    </Key>
+    <Property Name="Staff Id" Type="int" Nullable="false" />
+    <Property Name="Staff name" Type="varchar" MaxLength="50" />
+    <Property Name="Student Id" Type="int" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="Student Id" />
+    </Key>
+    <Property Name="Student Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Student name" Type="varchar" MaxLength="50" />
+    <Property Name="Parent Id" Type="int" />
+    <Property Name="Staff Id" Type="int" />
+  </EntityType>
+  <Association Name="FK__Parent__Student __34C8D9D1">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+    <End Role="Parent" Type="Self.Parent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="Staff Id" />
+      </Principal>
+      <Dependent Role="Parent">
+        <PropertyRef Name="Student Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Staff__Student I__35BCFE0A">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Student Id" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="Student Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Database1ModelStoreContainer">
+    <EntitySet Name="Parent" EntityType="Self.Parent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Parent__Student __34C8D9D1" Association="Self.FK__Parent__Student __34C8D9D1">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="Parent" EntitySet="Parent" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Staff__Student I__35BCFE0A" Association="Self.FK__Staff__Student I__35BCFE0A">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Staff" EntitySet="Staff" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

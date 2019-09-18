@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Parent">
+    <Key>
+      <PropertyRef Name="Parent_Id" />
+    </Key>
+    <Property Name="Parent_Id" Type="Int32" Nullable="false" />
+    <Property Name="Parent_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Student_Id" Type="Int32" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK__Parent__Student___34C8D9D1" FromRole="Parent" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="Staff_Id" />
+    </Key>
+    <Property Name="Staff_Id" Type="Int32" Nullable="false" />
+    <Property Name="Staff_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Student_Id" Type="Int32" />
+    <NavigationProperty Name="Parents" Relationship="Self.FK__Parent__Student___34C8D9D1" FromRole="Staff" ToRole="Parent" />
+    <NavigationProperty Name="Student" Relationship="Self.FK__Staff__Student_I__35BCFE0A" FromRole="Staff" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="Student_Id" />
+    </Key>
+    <Property Name="Student_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Student_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Parent_Id" Type="Int32" />
+    <Property Name="Staff_Id" Type="Int32" />
+    <NavigationProperty Name="Staffs" Relationship="Self.FK__Staff__Student_I__35BCFE0A" FromRole="Student" ToRole="Staff" />
+  </EntityType>
+  <Association Name="FK__Parent__Student___34C8D9D1">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+    <End Role="Parent" Type="Self.Parent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="Staff_Id" />
+      </Principal>
+      <Dependent Role="Parent">
+        <PropertyRef Name="Student_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Staff__Student_I__35BCFE0A">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Student_Id" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="Student_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Database1Entities3" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Parents" EntityType="Self.Parent" />
+    <EntitySet Name="Staffs" EntityType="Self.Staff" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <AssociationSet Name="FK__Parent__Student___34C8D9D1" Association="Self.FK__Parent__Student___34C8D9D1">
+      <End Role="Staff" EntitySet="Staffs" />
+      <End Role="Parent" EntitySet="Parents" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Staff__Student_I__35BCFE0A" Association="Self.FK__Staff__Student_I__35BCFE0A">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="Staff" EntitySet="Staffs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

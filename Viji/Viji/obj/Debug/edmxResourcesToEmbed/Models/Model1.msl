@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities3">
+    <EntitySetMapping Name="Parents">
+      <EntityTypeMapping TypeName="Database1Model.Parent">
+        <MappingFragment StoreEntitySet="Parent">
+          <ScalarProperty Name="Parent_Id" ColumnName="Parent Id" />
+          <ScalarProperty Name="Parent_Name" ColumnName="Parent Name" />
+          <ScalarProperty Name="Student_Id" ColumnName="Student Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Staffs">
+      <EntityTypeMapping TypeName="Database1Model.Staff">
+        <MappingFragment StoreEntitySet="Staff">
+          <ScalarProperty Name="Staff_Id" ColumnName="Staff Id" />
+          <ScalarProperty Name="Staff_name" ColumnName="Staff name" />
+          <ScalarProperty Name="Student_Id" ColumnName="Student Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="Database1Model.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="Student_Id" ColumnName="Student Id" />
+          <ScalarProperty Name="Student_name" ColumnName="Student name" />
+          <ScalarProperty Name="Parent_Id" ColumnName="Parent Id" />
+          <ScalarProperty Name="Staff_Id" ColumnName="Staff Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
